@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let item of userList" [ngClass]="{'active': activeUserId === item.id}" (click)="selectUser(item)">
+        <div class="user-pic">
+            <p>{{item.name[0]}}</p>
+        </div>
+        <h3>{{item?.name}}</h3>
+    </li>
+</ul>

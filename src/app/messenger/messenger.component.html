@@ -1,0 +1,38 @@
+<div class="chat-container">
+    <ng-container *ngIf="currentUser">
+        <div class="chat-header">
+            <div class="user-pic">
+                <p>{{currentUser.name[0]}}</p>
+            </div>
+            <h3>{{currentUser?.name}}</h3>
+        </div>
+        <div class="chat-body">
+            <div>
+                <div *ngFor="let message of currentUser.messages" class="msg-container">
+                    <div class="message-content" [ngClass]="{'right-side': message.from === loginID}">
+                        <p>
+                            {{message.msg}}
+                        </p>
+                        <h6 class="time-stamp">
+                            {{ message?.timestamp | date:'h:mm a' }}
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input [(ngModel)]="inputText" (keydown.enter)="onEnter($event)" type="text" placeholder="Type a message">
+            <button (click)="sendMessage()" *ngIf="inputText.trim()" class="send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor"
+                        d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path>
+                </svg>
+            </button>
+        </div>
+    </ng-container>
+    <div class="empty-state" *ngIf="!currentUser">
+        <p>
+            Please select user
+        </p>
+    </div>
+</div>
